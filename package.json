@@ -1,0 +1,33 @@
+{
+  "name": "harveygames",
+  "private": true,
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "dev": "react-router dev",
+    "build": "react-router build && node scripts/hoist-pages.mjs",
+    "typecheck": "react-router typegen && tsc"
+  },
+  "dependencies": {
+    "@fontsource/outfit": "^5.2.8",
+    "@fontsource/syne": "^5.2.7",
+    "@react-router/node": "7.18.4",
+    "dexie": "4.4.6",
+    "dexie-react-hooks": "4.4.0",
+    "isbot": "^5.1.31",
+    "phaser": "4.2.1",
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
+    "react-router": "7.18.4"
+  },
+  "devDependencies": {
+    "@react-router/dev": "7.18.4",
+    "@types/react": "^19.2.2",
+    "@types/react-dom": "^19.2.2",
+    "typescript": "6.0.3",
+    "vite": "8.3.4"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}
