@@ -113,6 +113,12 @@
   text-shadow: 0 2px 10px rgba(0, 0, 0, 0.28);
 }
 
+.rustwing .brand-word {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .rustwing .brand-plane {
   position: relative;
   width: 34px;
@@ -447,6 +453,18 @@
   border-top: 1px solid rgba(244, 241, 234, 0.1);
 }
 
+.rustwing .shop-list .shop-label {
+  display: block;
+  padding: 14px 0 2px;
+  border-top: 0;
+  color: #d7f58a;
+  font-family: Syne, sans-serif;
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
 .rustwing .shop-list b {
   display: block;
   font-size: 0.98rem;
@@ -461,13 +479,14 @@
 }
 
 .rustwing .shop-list button {
-  min-width: 76px;
+  min-width: 88px;
   padding: 8px 12px;
   border: 0;
   border-radius: 999px;
   background: #c8f542;
   color: #17200c;
   font-weight: 700;
+  white-space: nowrap;
 }
 
 .rustwing .shop-list button:disabled {

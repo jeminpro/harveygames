@@ -56,7 +56,7 @@ export const rustwingMarkup = `
   <div class="dialog-card shop-card">
     <p class="eyebrow"><span></span> Market</p>
     <h2 id="shopTitle">Spend your coins.</h2>
-    <p>Buy it once and it stays on the plane. Coins only leave when you buy.</p>
+    <p>Buy a part or a plane. It stays yours, and coins only leave when you buy. Pick a plane, then take off.</p>
     <ul id="shopList" class="shop-list"></ul>
     <button id="shopClose" class="text-button" type="button">Back</button>
   </div>
