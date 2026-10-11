@@ -25,7 +25,7 @@ export default function Play({ params }: Route.ComponentProps) {
 
   return (
     <main className="play-screen">
-      <PhaserStage title={game.title} />
+      <PhaserStage key={game.id} gameId={game.id} title={game.title} />
     </main>
   );
 }

@@ -12,6 +12,12 @@ export const catalog: GameRecord[] = [
     tagline: "Small blob. Big appetite.",
     order: 1,
   },
+  {
+    id: "rustwing",
+    title: "Flight Simulator",
+    tagline: "A wreck that still flies.",
+    order: 2,
+  },
 ];
 
 export function findGame(gameId: string | undefined) {

@@ -112,6 +112,9 @@ type Refs = {
   join: HTMLButtonElement;
   split: HTMLButtonElement;
   eject: HTMLButtonElement;
+  helpOpen: HTMLButtonElement;
+  help: HTMLElement;
+  helpClose: HTMLButtonElement;
   dialog: HTMLElement;
   dialogTag: HTMLElement;
   dialogTitle: HTMLElement;
@@ -224,6 +227,7 @@ export class BlobberSession {
   private levelProgress = 0;
   private levelMistakes = 0;
   private leaderboardOpen = false;
+  private helpHeldPlay = false;
   private musicEnabled = false;
   private musicTimer: ReturnType<typeof setInterval> | null = null;
   private musicGain: GainNode | null = null;
@@ -322,6 +326,9 @@ export class BlobberSession {
       join: must(this.root, "join"),
       split: must(this.root, "split"),
       eject: must(this.root, "eject"),
+      helpOpen: must(this.root, "helpOpen"),
+      help: must(this.root, "help"),
+      helpClose: must(this.root, "helpClose"),
       dialog: must(this.root, "dialog"),
       dialogTag: must(this.root, "dialogTag"),
       dialogTitle: must(this.root, "dialogTitle"),
@@ -358,6 +365,11 @@ export class BlobberSession {
     this.refs.split.onclick = () => this.split();
     this.refs.join.onclick = () => this.join();
     this.refs.eject.onclick = () => this.eject();
+    this.refs.helpOpen.onclick = () => this.setHelpOpen(this.refs.help.classList.contains("hidden"));
+    this.refs.helpClose.onclick = () => this.setHelpOpen(false);
+    this.refs.help.onclick = (event) => {
+      if (event.target === this.refs.help) this.setHelpOpen(false);
+    };
     this.refs.sound.onclick = () => this.toggleSound();
     this.refs.music.onclick = () => {
       void this.toggleMusic();
@@ -520,6 +532,7 @@ export class BlobberSession {
 
   private start() {
     if (this.disposed) return;
+    this.hideHelp();
     this.releaseFocus();
     window.clearTimeout(this.toastTimer);
     this.refs.toast.classList.remove("show");
@@ -568,6 +581,7 @@ export class BlobberSession {
   private home() {
     if (this.disposed) return;
     this.mode = "menu";
+    this.hideHelp();
     this.setLeaderboardOpen(false);
     this.refs.menu.classList.remove("hidden");
     this.refs.worldNote.classList.remove("hidden");
@@ -1412,6 +1426,42 @@ export class BlobberSession {
     return `${weight} ${size}px Outfit, sans-serif`;
   }
 
+  private setHelpOpen(open: boolean) {
+    if (this.disposed) return;
+    const visible = !this.refs.help.classList.contains("hidden");
+    if (open === visible) return;
+    if (open) {
+      this.helpHeldPlay = this.mode === "playing";
+      if (this.helpHeldPlay) {
+        this.mode = "paused";
+        this.keys = {};
+        this.pointer.active = false;
+      }
+      this.refs.help.classList.remove("hidden");
+      this.refs.helpOpen.setAttribute("aria-expanded", "true");
+      this.refs.helpClose.focus();
+      return;
+    }
+    this.refs.help.classList.add("hidden");
+    this.refs.helpOpen.setAttribute("aria-expanded", "false");
+    const resume = this.helpHeldPlay && this.mode === "paused";
+    this.helpHeldPlay = false;
+    if (resume) {
+      this.keys = {};
+      this.pointer.active = false;
+      this.mode = "playing";
+      this.releaseFocus();
+      return;
+    }
+    this.refs.helpOpen.focus();
+  }
+
+  private hideHelp() {
+    this.helpHeldPlay = false;
+    this.refs.help.classList.add("hidden");
+    this.refs.helpOpen.setAttribute("aria-expanded", "false");
+  }
+
   private releaseFocus() {
     if (document.activeElement instanceof HTMLElement) document.activeElement.blur();
   }
@@ -1552,6 +1602,11 @@ export class BlobberSession {
   }
 
   private readonly onKeyDown = (event: KeyboardEvent) => {
+    if (event.key === "Escape" && !this.refs.help.classList.contains("hidden")) {
+      event.preventDefault();
+      this.setHelpOpen(false);
+      return;
+    }
     const tag = document.activeElement?.tagName;
     if ((tag === "INPUT" || tag === "SELECT" || tag === "BUTTON") && this.mode === "menu") return;
     if (

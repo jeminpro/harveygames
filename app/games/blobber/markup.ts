@@ -10,6 +10,7 @@ export const blobberMarkup = `
     </button>
   </div>
   <div class="header-right">
+    <button id="helpOpen" type="button" class="icon help-control" aria-label="How to play" aria-expanded="false" aria-controls="help" title="How to play"><span aria-hidden="true">?</span><span class="help-label">How to play</span></button>
     <button id="sound" type="button" class="icon" aria-label="Turn sound effects on" title="Toggle sound effects">🔊<span id="soundMark">×</span></button>
     <button id="music" type="button" class="icon music-control" aria-label="Turn background music on" aria-pressed="false" title="Turn background music on"><span aria-hidden="true">♫</span><span class="music-label">Music</span></button>
     <button id="pause" type="button" class="icon hidden" aria-label="Pause game" title="Pause (Esc)">Ⅱ</button>
@@ -87,6 +88,27 @@ export const blobberMarkup = `
     </div>
   </div>
   <canvas id="minimap" width="144" height="144" aria-label="Arena minimap"></canvas>
+</div>
+<div id="help" class="dialog help hidden" role="dialog" aria-modal="true" aria-labelledby="helpTitle">
+  <div class="dialog-card help-card">
+    <div class="eyebrow">HOW TO PLAY</div>
+    <h2 id="helpTitle">Grow bigger than the rest.</h2>
+    <ul class="help-list">
+      <li><b>Move</b><span>Mouse, arrow keys, or touch. Steer toward food and away from bigger blobs.</span></li>
+      <li><b>Eat</b><span>Dots grow you. Golden triangles add 5% mass. Red squares take 5% away.</span></li>
+      <li><b>Rivals</b><span>Eat smaller blobs. Bigger ones can eat you. You are safe for the first 3 seconds.</span></li>
+      <li><b>Split</b><span>Space. Split to catch smaller rivals. You need 36 mass, and you can have up to 8 pieces.</span></li>
+      <li><b>Join</b><span>J. Merge your pieces back together, one step at a time.</span></li>
+      <li><b>Eject</b><span>W. Drop a little mass in the direction you are facing.</span></li>
+    </ul>
+    <div class="help-levels">
+      <p><b>Triangle trail.</b> Collect 4 golden triangles.</p>
+      <p><b>Square slalom.</b> Collect 30 food dots. A red square resets your count.</p>
+      <p><b>Diamond keys.</b> Collect 3 blue diamonds, then enter the purple portal.</p>
+      <p><b>Free arena.</b> Grow, split, and explore at your own pace.</p>
+    </div>
+    <button id="helpClose" type="button" class="primary">Got it <span>→</span></button>
+  </div>
 </div>
 <div id="dialog" class="dialog hidden" role="dialog" aria-modal="true" aria-labelledby="dialogTitle">
   <div class="dialog-card">

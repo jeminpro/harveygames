@@ -1,0 +1,553 @@
+.rustwing {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  overflow: hidden;
+  color: #f4f1ea;
+  font-family: Outfit, sans-serif;
+  pointer-events: none;
+  user-select: none;
+}
+
+.rustwing button {
+  font: inherit;
+  cursor: pointer;
+}
+
+.rustwing button:focus-visible {
+  outline: 3px solid #c8f542;
+  outline-offset: 3px;
+}
+
+.rustwing header {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 9;
+  display: flex;
+  height: 88px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 4%;
+  pointer-events: none;
+}
+
+.rustwing header > * {
+  pointer-events: auto;
+}
+
+.rustwing header > .coin-counter {
+  pointer-events: none;
+}
+
+.rustwing .header-left {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 14px;
+}
+
+.rustwing .coin-counter {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 14px 8px 10px;
+  border: 1px solid rgba(244, 241, 234, 0.16);
+  border-radius: 16px;
+  background: rgba(12, 16, 22, 0.78);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.22);
+  pointer-events: none;
+}
+
+.rustwing .coin-counter i {
+  width: 28px;
+  height: 28px;
+  border: 2px solid #a87a1c;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #fff1b0, #f0c84a 55%, #c8922a);
+  box-shadow: inset 0 0 0 4px rgba(255, 236, 170, 0.45);
+}
+
+.rustwing .coin-counter small {
+  display: block;
+  color: #d7c48a;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.rustwing .coin-counter strong {
+  display: block;
+  margin-top: 1px;
+  color: #fff8df;
+  font-family: Syne, sans-serif;
+  font-size: 1.7rem;
+  font-weight: 800;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.rustwing .cabinet-home {
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+}
+
+.rustwing .brand {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  padding: 0 0 0 14px;
+  border: 0;
+  border-left: 1px solid rgba(244, 241, 234, 0.28);
+  border-radius: 0;
+  background: transparent;
+  color: #fff;
+  font-family: Syne, sans-serif;
+  font-size: clamp(1.15rem, 2.2vw, 1.75rem);
+  font-weight: 800;
+  letter-spacing: -0.05em;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.28);
+}
+
+.rustwing .brand-plane {
+  position: relative;
+  width: 34px;
+  height: 12px;
+  flex-shrink: 0;
+  border-radius: 40% 55% 45% 40%;
+  background: #d7b48a;
+  transform: rotate(-10deg);
+}
+
+.rustwing .brand-plane::before,
+.rustwing .brand-plane::after {
+  content: "";
+  position: absolute;
+  background: #a86b3c;
+}
+
+.rustwing .brand-plane::before {
+  top: 7px;
+  left: 6px;
+  width: 18px;
+  height: 5px;
+  border-radius: 2px;
+  transform: skewX(-24deg);
+}
+
+.rustwing .brand-plane::after {
+  top: -2px;
+  right: -4px;
+  width: 4px;
+  height: 16px;
+  border-radius: 2px;
+}
+
+.rustwing .menu {
+  position: absolute;
+  top: 50%;
+  left: 5%;
+  z-index: 4;
+  width: min(400px, calc(100% - 2.5rem));
+  padding: 22px 22px 18px;
+  border: 1px solid rgba(244, 241, 234, 0.14);
+  border-radius: 22px;
+  background: rgba(12, 18, 16, 0.78);
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.28);
+  transform: translateY(-48%);
+  pointer-events: auto;
+  backdrop-filter: blur(8px);
+}
+
+.rustwing .eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  color: #c8f542;
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.rustwing .eyebrow span {
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 50%;
+  background: #c8f542;
+  box-shadow: 0 0 10px #c8f542;
+}
+
+.rustwing h1 {
+  margin: 12px 0 10px;
+  color: #f7f4ee;
+  font-family: Syne, sans-serif;
+  font-size: clamp(2.4rem, 5vw, 3.6rem);
+  font-weight: 800;
+  letter-spacing: -0.05em;
+  line-height: 0.95;
+}
+
+.rustwing h1 em {
+  color: #d7f58a;
+  font-style: normal;
+}
+
+.rustwing .intro,
+.rustwing .controls,
+.rustwing .best {
+  max-width: 28rem;
+}
+
+.rustwing .intro {
+  margin: 0 0 18px;
+  color: #f4f1ea;
+  font-size: 1.02rem;
+  line-height: 1.45;
+}
+
+.rustwing .primary {
+  display: flex;
+  width: min(100%, 280px);
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 18px;
+  border: 0;
+  border-radius: 12px;
+  background: #c8f542;
+  color: #17200c;
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.rustwing .menu-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: min(100%, 280px);
+}
+
+.rustwing .menu-actions .primary,
+.rustwing .market-button {
+  width: 100%;
+}
+
+.rustwing .market-button {
+  padding: 12px 16px;
+  border: 1px solid rgba(244, 241, 234, 0.22);
+  border-radius: 12px;
+  background: transparent;
+  color: #f4f1ea;
+  font-weight: 700;
+}
+
+.rustwing .primary span {
+  font-size: 1.3rem;
+  line-height: 1;
+}
+
+.rustwing .best {
+  margin: 14px 0 0;
+  color: #f4f1ea;
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.rustwing .best b {
+  color: #fff;
+  font-family: Syne, sans-serif;
+  font-size: 1rem;
+  letter-spacing: 0;
+}
+
+.rustwing .controls {
+  margin: 6px 0 0;
+  color: rgba(244, 241, 234, 0.82);
+  font-size: 0.85rem;
+}
+
+.rustwing .hud {
+  position: absolute;
+  top: 92px;
+  left: 4%;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.rustwing .score-pill {
+  display: flex;
+  align-items: flex-end;
+  gap: 22px;
+  width: fit-content;
+  padding: 12px 16px;
+  border: 1px solid rgba(244, 241, 234, 0.14);
+  border-radius: 16px;
+  background: rgba(12, 16, 22, 0.72);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+}
+
+.rustwing .score-pill small {
+  display: block;
+  color: #b7c0b0;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.rustwing .score-pill strong,
+.rustwing .score-pill b {
+  display: block;
+  margin-top: 2px;
+  font-family: Syne, sans-serif;
+  font-weight: 800;
+}
+
+.rustwing .score-pill strong {
+  font-size: 1.8rem;
+  line-height: 1;
+}
+
+.rustwing .score-pill b {
+  color: #f4f1ea;
+  font-size: 1.15rem;
+}
+
+.rustwing #rate,
+.rustwing #hint {
+  width: fit-content;
+  margin: 8px 0 0;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(12, 16, 22, 0.62);
+  color: #f4f1ea;
+  font-size: 0.82rem;
+}
+
+.rustwing .pitch-controls {
+  position: absolute;
+  right: 4%;
+  bottom: 28px;
+  z-index: 6;
+  display: flex;
+  gap: 12px;
+  pointer-events: auto;
+}
+
+.rustwing .pitch-controls button {
+  min-width: 104px;
+  min-height: 72px;
+  padding: 0 18px;
+  border: 1px solid rgba(244, 241, 234, 0.2);
+  border-radius: 18px;
+  background: rgba(12, 16, 22, 0.82);
+  color: #f4f1ea;
+  font-size: 1.15rem;
+  font-weight: 700;
+  touch-action: none;
+}
+
+.rustwing .pitch-controls button[aria-pressed="true"] {
+  border-color: transparent;
+  background: #c8f542;
+  color: #17200c;
+}
+
+.rustwing .dialog {
+  position: absolute;
+  inset: 0;
+  z-index: 8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(8, 14, 18, 0.55);
+  pointer-events: auto;
+  backdrop-filter: blur(8px);
+}
+
+.rustwing .dialog-card {
+  width: min(400px, 100%);
+  padding: 28px 26px 22px;
+  border: 1px solid rgba(244, 241, 234, 0.12);
+  border-radius: 22px;
+  background: #141a16;
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.35);
+  text-align: left;
+}
+
+.rustwing .dialog-card h2 {
+  margin: 10px 0;
+  font-family: Syne, sans-serif;
+  font-size: 2.1rem;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+
+.rustwing .dialog-card p {
+  margin: 0 0 8px;
+  color: #c5d0c4;
+  line-height: 1.45;
+}
+
+.rustwing .round-stats {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 18px 0 20px;
+}
+
+.rustwing .round-stats small {
+  display: block;
+  color: #8ea090;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.rustwing .round-stats b {
+  display: block;
+  margin-top: 4px;
+  color: #d7f58a;
+  font-family: Syne, sans-serif;
+  font-size: 1.45rem;
+}
+
+.rustwing .dialog-card .primary {
+  width: 100%;
+}
+
+.rustwing .shop-card {
+  max-height: min(78dvh, 640px);
+  overflow: auto;
+}
+
+.rustwing .shop-list {
+  display: grid;
+  gap: 0;
+  margin: 14px 0 4px;
+  padding: 0;
+  list-style: none;
+}
+
+.rustwing .shop-list li {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 4px 12px;
+  align-items: center;
+  padding: 12px 0;
+  border-top: 1px solid rgba(244, 241, 234, 0.1);
+}
+
+.rustwing .shop-list b {
+  display: block;
+  font-size: 0.98rem;
+}
+
+.rustwing .shop-list small {
+  display: block;
+  margin-top: 3px;
+  color: #b7c4b6;
+  font-size: 0.82rem;
+  line-height: 1.35;
+}
+
+.rustwing .shop-list button {
+  min-width: 76px;
+  padding: 8px 12px;
+  border: 0;
+  border-radius: 999px;
+  background: #c8f542;
+  color: #17200c;
+  font-weight: 700;
+}
+
+.rustwing .shop-list button:disabled {
+  background: #2a3328;
+  color: #8ea090;
+  cursor: default;
+}
+
+.rustwing .text-button {
+  display: block;
+  width: 100%;
+  margin-top: 8px;
+  padding: 10px;
+  border: 0;
+  background: transparent;
+  color: #b7c4b6;
+  font-size: 0.92rem;
+}
+
+.rustwing .hidden {
+  display: none !important;
+}
+
+@media (max-width: 720px) {
+  .rustwing header {
+    height: 72px;
+  }
+
+  .rustwing .brand {
+    font-size: 1.15rem;
+  }
+
+  .rustwing .menu {
+    top: auto;
+    right: 4%;
+    bottom: 18px;
+    left: 4%;
+    width: auto;
+    transform: none;
+  }
+
+  .rustwing h1 {
+    font-size: 2.3rem;
+  }
+
+  .rustwing .hud {
+    top: 76px;
+    right: 4%;
+    left: 4%;
+  }
+
+  .rustwing .score-pill {
+    gap: 16px;
+  }
+
+  .rustwing .pitch-controls {
+    right: 4%;
+    bottom: calc(16px + env(safe-area-inset-bottom));
+    left: 4%;
+  }
+
+  .rustwing .pitch-controls button {
+    flex: 1;
+    min-height: 64px;
+  }
+}
+
+@media (max-height: 760px) {
+  .rustwing .menu {
+    top: 76px;
+    transform: none;
+  }
+
+  .rustwing h1 {
+    margin: 8px 0;
+    font-size: 2.2rem;
+  }
+
+  .rustwing .intro {
+    margin-bottom: 12px;
+    font-size: 0.95rem;
+  }
+}
