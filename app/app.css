@@ -57,6 +57,7 @@ a {
 
 .brand {
   display: flex;
+  flex-shrink: 0;
   align-items: center;
   gap: 0.75rem;
 }
@@ -73,6 +74,7 @@ a {
   font-size: 1.15rem;
   font-weight: 700;
   letter-spacing: -0.03em;
+  white-space: nowrap;
 }
 
 .brand-name em {
