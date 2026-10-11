@@ -1,6 +1,5 @@
 import Phaser from "phaser";
 import { RustwingSession } from "./session";
-import "./rustwing.css";
 
 type MountOptions = {
   onExit: () => void;

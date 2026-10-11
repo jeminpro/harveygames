@@ -1,6 +1,5 @@
 import Phaser from "phaser";
 import { BlobberSession } from "./session";
-import "./blobber.css";
 
 type MountOptions = {
   onExit: () => void;

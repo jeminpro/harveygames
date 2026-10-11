@@ -1,5 +1,7 @@
 import { useEffect, useRef } from "react";
 import { useNavigate } from "react-router";
+import "../games/blobber/blobber.css";
+import "../games/rustwing/rustwing.css";
 
 export function PhaserStage({ gameId, title }: { gameId: string; title: string }) {
   const hostRef = useRef<HTMLDivElement>(null);
