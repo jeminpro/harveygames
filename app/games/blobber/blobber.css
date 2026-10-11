@@ -1241,6 +1241,77 @@
   }
 }
 
+@media (max-height: 900px) {
+  .blobber .menu {
+    top: 92px;
+    bottom: 16px;
+    max-height: calc(100dvh - 108px);
+    padding: 0 4px 16px 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-color: #394765 transparent;
+    scrollbar-width: thin;
+    touch-action: pan-y;
+    transform: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .blobber .menu-scroll {
+    min-height: auto;
+    overflow: visible;
+  }
+}
+
+@media (max-width: 600px) {
+  .blobber header {
+    height: calc(72px + env(safe-area-inset-top));
+    padding-top: env(safe-area-inset-top);
+  }
+
+  .blobber .header-right {
+    gap: 6px;
+  }
+
+  .blobber .library-link {
+    padding: 0 8px;
+  }
+
+  .blobber .music-control {
+    width: 39px;
+    min-width: 39px;
+    padding: 0;
+  }
+
+  .blobber .music-control .music-label {
+    display: none;
+  }
+
+  .blobber .menu {
+    top: calc(78px + env(safe-area-inset-top));
+    right: 5%;
+    bottom: calc(10px + env(safe-area-inset-bottom));
+    left: 5%;
+    width: auto;
+    max-height: none;
+    padding: 0 0 12px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    touch-action: pan-y;
+    transform: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .blobber .bottom-hud {
+    bottom: calc(16px + env(safe-area-inset-bottom));
+  }
+
+  .blobber #minimap {
+    bottom: calc(84px + env(safe-area-inset-bottom));
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .blobber button,
   .blobber .toast,
