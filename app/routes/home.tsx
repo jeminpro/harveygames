@@ -13,10 +13,6 @@ export default function Home() {
     <main className="library">
       <div className="library-intro">
         <p className="eyebrow">Choose a game</p>
-        <h1>Ready when you are.</h1>
-        <p>
-          Pick a title and play it here. The cabinet stays on this device.
-        </p>
       </div>
       <ul className="grid">
         {games.map((game) => (

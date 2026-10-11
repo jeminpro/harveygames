@@ -1,4 +1,4 @@
-import { useEffect, useState, type ReactNode } from "react";
+import { useEffect, type ReactNode } from "react";
 import outfit400 from "@fontsource/outfit/400.css?url";
 import outfit500 from "@fontsource/outfit/500.css?url";
 import outfit600 from "@fontsource/outfit/600.css?url";
@@ -63,25 +63,15 @@ export function Layout({ children }: { children: ReactNode }) {
 }
 
 export default function App() {
-  const [savedLocally, setSavedLocally] = useState(false);
-
   useEffect(() => {
-    let cancelled = false;
-    seedCatalog()
-      .then(() => {
-        if (!cancelled) setSavedLocally(true);
-      })
-      .catch((error: unknown) => {
-        console.error("Could not open the local game library", error);
-      });
-    return () => {
-      cancelled = true;
-    };
+    seedCatalog().catch((error: unknown) => {
+      console.error("Could not open the local game library", error);
+    });
   }, []);
 
   return (
     <>
-      <SiteHeader savedLocally={savedLocally} />
+      <SiteHeader />
       <Outlet />
     </>
   );
@@ -90,7 +80,7 @@ export default function App() {
 export function HydrateFallback() {
   return (
     <>
-      <SiteHeader savedLocally={false} />
+      <SiteHeader />
       <main className="library">
         <div className="library-intro">
           <p className="eyebrow">Harvey Games</p>

@@ -51,13 +51,22 @@
   pointer-events: auto;
 }
 
+.blobber .header-left {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 16px;
+}
+
 .blobber .brand {
   display: flex;
   align-items: center;
   gap: 10px;
   margin: 0;
-  padding: 0;
+  padding: 0 0 0 16px;
   border: 0;
+  border-left: 1px solid rgba(243, 247, 245, 0.16);
+  border-radius: 0;
   background: transparent;
   color: #fff;
   font-family: Syne, sans-serif;
@@ -98,17 +107,6 @@
   gap: 18px;
 }
 
-.blobber .status {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  color: #b7c6cb;
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 1.6px;
-}
-
-.blobber .status i,
 .blobber .bottom-hud i {
   display: inline-block;
   width: 6px;
@@ -117,19 +115,12 @@
   background: var(--mint);
 }
 
-.blobber .library-link,
 .blobber .icon {
   height: 39px;
   border: 1px solid #bba6ff26;
   border-radius: 12px;
   background: #17213bcc;
   color: #d8e3e4;
-}
-
-.blobber .library-link {
-  padding: 0 12px;
-  font-size: 12px;
-  font-weight: 600;
 }
 
 .blobber .icon {
@@ -201,13 +192,13 @@
 }
 
 .blobber h1 {
-  margin: 22px 0 18px;
+  margin: 14px 0 12px;
   color: var(--text);
   font-family: Syne, sans-serif;
-  font-size: 64px;
+  font-size: 40px;
   font-weight: 800;
-  letter-spacing: -3.5px;
-  line-height: 1.04;
+  letter-spacing: -1.6px;
+  line-height: 1.05;
 }
 
 .blobber h1 em {
@@ -936,7 +927,7 @@
   }
 
   .blobber h1 {
-    font-size: 76px;
+    font-size: 44px;
   }
 
   .blobber .intro {
@@ -962,9 +953,9 @@
   }
 
   .blobber h1 {
-    margin: 8px 0 8px;
-    font-size: 54px;
-    letter-spacing: -2.6px;
+    margin: 8px 0;
+    font-size: 32px;
+    letter-spacing: -1.2px;
   }
 
   .blobber .intro {
@@ -1026,7 +1017,7 @@
   }
 
   .blobber h1 {
-    font-size: 58px;
+    font-size: 34px;
   }
 
   .blobber footer span {
@@ -1040,15 +1031,33 @@
     padding: 0 6%;
   }
 
-  .blobber .brand {
-    font-size: 27px;
+  .blobber .header-left {
+    flex: 1;
+    gap: 8px;
+    min-width: 0;
   }
 
-  .blobber .status {
-    display: none;
+  .blobber .brand {
+    min-width: 0;
+    padding-left: 8px;
+    gap: 6px;
+    font-size: 20px;
+  }
+
+  .blobber .brand-blob {
+    flex-shrink: 0;
+    width: 28px;
+    height: 26px;
+  }
+
+  .blobber .brand-word {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   .blobber .header-right {
+    flex-shrink: 0;
     gap: 8px;
   }
 
@@ -1061,10 +1070,10 @@
   }
 
   .blobber h1 {
-    margin: 17px 0 14px;
-    font-size: 52px;
-    letter-spacing: -2.7px;
-    line-height: 1;
+    margin: 12px 0 10px;
+    font-size: 30px;
+    letter-spacing: -1.2px;
+    line-height: 1.05;
   }
 
   .blobber .intro {
@@ -1211,8 +1220,8 @@
   }
 
   .blobber h1 {
-    margin: 15px 0 10px;
-    font-size: 48px;
+    margin: 10px 0 8px;
+    font-size: 28px;
   }
 
   .blobber .intro {
@@ -1271,10 +1280,6 @@
 
   .blobber .header-right {
     gap: 6px;
-  }
-
-  .blobber .library-link {
-    padding: 0 8px;
   }
 
   .blobber .music-control {

@@ -1,0 +1,2 @@
+/** Left-side exit for a play screen. Place it before the game title and logo. */
+export const cabinetHomeMarkup = `<button type="button" id="cabinetHome" class="cabinet-home" aria-label="Back to home"><svg class="cabinet-home-arrow" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M19 12H6M11 7l-5 5 5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>home</span></button>`;

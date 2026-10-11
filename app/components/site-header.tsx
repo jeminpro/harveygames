@@ -1,6 +1,6 @@
 import { Link } from "react-router";
 
-export function SiteHeader({ savedLocally }: { savedLocally: boolean }) {
+export function SiteHeader() {
   return (
     <header className="topbar">
       <Link to="/" className="brand">
@@ -13,10 +13,6 @@ export function SiteHeader({ savedLocally }: { savedLocally: boolean }) {
           Harvey <em>Games</em>
         </span>
       </Link>
-      <p className="status-chip">
-        <span className={savedLocally ? "status-dot is-live" : "status-dot"} />
-        {savedLocally ? "Saved in this browser" : "Opening library"}
-      </p>
     </header>
   );
 }

@@ -82,7 +82,7 @@ type Refs = {
   soundMark: HTMLElement;
   music: HTMLButtonElement;
   pause: HTMLButtonElement;
-  library: HTMLButtonElement;
+  cabinetHome: HTMLButtonElement;
   brand: HTMLButtonElement;
   menu: HTMLElement;
   name: HTMLInputElement;
@@ -292,7 +292,7 @@ export class BlobberSession {
       soundMark: must(this.root, "soundMark"),
       music: must(this.root, "music"),
       pause: must(this.root, "pause"),
-      library: must(this.root, "library"),
+      cabinetHome: must(this.root, "cabinetHome"),
       brand: must(this.root, "brand"),
       menu: must(this.root, "menu"),
       name: must(this.root, "name"),
@@ -352,7 +352,7 @@ export class BlobberSession {
       event.preventDefault();
       if (this.mode !== "menu") this.home();
     };
-    this.refs.library.onclick = () => this.options.onExit();
+    this.refs.cabinetHome.onclick = () => this.options.onExit();
     this.refs.pause.onclick = () => this.pause();
     this.refs.resume.onclick = () => this.pause();
     this.refs.split.onclick = () => this.split();

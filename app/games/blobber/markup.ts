@@ -1,12 +1,15 @@
+import { cabinetHomeMarkup } from "../play-chrome";
+
 export const blobberMarkup = `
 <header>
-  <button type="button" class="brand" id="brand" aria-label="Blobber home">
-    <span class="brand-blob" aria-hidden="true"><i></i><i></i></span>
-    <span class="brand-word">Blobber</span>
-  </button>
+  <div class="header-left">
+    ${cabinetHomeMarkup}
+    <button type="button" class="brand" id="brand" aria-label="Blobber home">
+      <span class="brand-blob" aria-hidden="true"><i></i><i></i></span>
+      <span class="brand-word">Blobber</span>
+    </button>
+  </div>
   <div class="header-right">
-    <span class="status"><i></i> SOLO ARENA</span>
-    <button type="button" id="library" class="library-link">Library</button>
     <button id="sound" type="button" class="icon" aria-label="Turn sound effects on" title="Toggle sound effects">🔊<span id="soundMark">×</span></button>
     <button id="music" type="button" class="icon music-control" aria-label="Turn background music on" aria-pressed="false" title="Turn background music on"><span aria-hidden="true">♫</span><span class="music-label">Music</span></button>
     <button id="pause" type="button" class="icon hidden" aria-label="Pause game" title="Pause (Esc)">Ⅱ</button>
