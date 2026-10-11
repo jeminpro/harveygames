@@ -5,7 +5,9 @@ import { catalog } from "../games/catalog";
 
 export default function Home() {
   const liveGames = useLiveQuery(() => getDb().games.orderBy("order").toArray());
-  const games = liveGames?.length ? liveGames : catalog;
+  const currentIds = new Set(catalog.map((game) => game.id));
+  const savedGames = (liveGames ?? catalog).filter((game) => currentIds.has(game.id));
+  const games = savedGames.length > 0 ? savedGames : catalog;
 
   return (
     <main className="library">

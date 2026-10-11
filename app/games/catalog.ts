@@ -7,22 +7,10 @@ export type GameRecord = {
 
 export const catalog: GameRecord[] = [
   {
-    id: "signal",
-    title: "Signal Run",
-    tagline: "Thread a pulse through a dark grid.",
+    id: "blobber",
+    title: "Blobber",
+    tagline: "Small blob. Big appetite.",
     order: 1,
-  },
-  {
-    id: "drift",
-    title: "Night Drift",
-    tagline: "Hold the racing line through neon corners.",
-    order: 2,
-  },
-  {
-    id: "vault",
-    title: "Vault Circuit",
-    tagline: "Crack the lock before the lights drop.",
-    order: 3,
   },
 ];
 

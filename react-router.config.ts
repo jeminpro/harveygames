@@ -3,6 +3,6 @@ import { catalog } from "./app/games/catalog";
 
 export default {
   ssr: false,
-  basename: "/harveygames",
+  basename: "/harveygames/",
   prerender: ["/", ...catalog.map((game) => `/play/${game.id}`)],
 } satisfies Config;

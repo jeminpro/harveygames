@@ -24,16 +24,7 @@ export default function Play({ params }: Route.ComponentProps) {
   }
 
   return (
-    <main className="play">
-      <div className="play-bar">
-        <Link to="/" className="back-link">
-          Library
-        </Link>
-        <div>
-          <h1>{game.title}</h1>
-          <p>{game.tagline}</p>
-        </div>
-      </div>
+    <main className="play-screen">
       <PhaserStage title={game.title} />
     </main>
   );

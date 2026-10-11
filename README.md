@@ -9,9 +9,9 @@ Published site: [https://jeminpro.com/harveygames/](https://jeminpro.com/harveyg
 ## Stack
 
 - React 19.3.0
-- React Router 7.18.4, framework mode, `ssr: false`
+- React Router 8.4.0, framework mode, `ssr: false`
 - Vite 8.3.4
-- TypeScript 6.x
+- TypeScript 7.0.2
 - Dexie 4.4.6 for the local catalog
 - Phaser 4.2.1 for the playfield
 

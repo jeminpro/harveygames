@@ -8,12 +8,11 @@ alwaysApply: true
 Client-only game cabinet. No authentication and no server database.
 
 - Public URL: `https://jeminpro.com/harveygames/`
-- Public path is `/harveygames/`. React Router `basename` is `/harveygames`.
-- Vite `base` is `/harveygames` during `serve` and `/harveygames/` for production. The dev server requires basename to start with base, and the production slash keeps asset URLs intact.
+- Public path is `/harveygames/`. Vite `base` and React Router `basename` are both `/harveygames/`.
 - Do not add a project `CNAME`. The custom domain stays on the user Pages site.
-- React Router 7.18.4 framework mode, `ssr: false`
+- React Router 8.4.0 framework mode, `ssr: false`
 - Prerender `/` and each `/play/:gameId` from the catalog
-- React 19.3.0, Vite 8.3.4, TypeScript 6.x
+- React 19.3.0, Vite 8.3.4, TypeScript 7.0.2
 - Dexie 4.4.6 stores the catalog in IndexedDB. Seed from `app/games/catalog.ts`
 - Phaser 4.2.1 runs only inside the play route, created in an effect and destroyed on unmount
 - A new game needs a catalog entry and a matching prerender path

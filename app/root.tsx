@@ -2,6 +2,7 @@ import { useEffect, useState, type ReactNode } from "react";
 import outfit400 from "@fontsource/outfit/400.css?url";
 import outfit500 from "@fontsource/outfit/500.css?url";
 import outfit600 from "@fontsource/outfit/600.css?url";
+import outfit700 from "@fontsource/outfit/700.css?url";
 import syne700 from "@fontsource/syne/700.css?url";
 import syne800 from "@fontsource/syne/800.css?url";
 import {
@@ -20,14 +21,15 @@ import stylesheet from "./app.css?url";
 export const links: Route.LinksFunction = () => [
   {
     rel: "icon",
-    href: `${import.meta.env.BASE_URL.replace(/\/?$/, "/")}favicon.svg`,
-    type: "image/svg+xml",
+    href: `${import.meta.env.BASE_URL.replace(/\/?$/, "/")}logo.png`,
+    type: "image/png",
   },
   { rel: "stylesheet", href: syne700 },
   { rel: "stylesheet", href: syne800 },
   { rel: "stylesheet", href: outfit400 },
   { rel: "stylesheet", href: outfit500 },
   { rel: "stylesheet", href: outfit600 },
+  { rel: "stylesheet", href: outfit700 },
   { rel: "stylesheet", href: stylesheet },
 ];
 

@@ -22,5 +22,17 @@ export function getDb() {
 }
 
 export async function seedCatalog() {
-  await getDb().games.bulkPut(catalog);
+  const db = getDb();
+  const currentIds = new Set(catalog.map((game) => game.id));
+
+  await db.transaction("rw", db.games, async () => {
+    const stored = await db.games.toArray();
+    const removed = stored
+      .filter((game) => !currentIds.has(game.id))
+      .map((game) => game.id);
+    if (removed.length > 0) {
+      await db.games.bulkDelete(removed);
+    }
+    await db.games.bulkPut(catalog);
+  });
 }

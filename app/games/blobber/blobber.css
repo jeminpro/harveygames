@@ -1,0 +1,1250 @@
+.blobber {
+  --bg: #090f25;
+  --text: #f3f7f5;
+  --muted: #9baacf;
+  --mint: #c9f695;
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  overflow: hidden;
+  color: var(--text);
+  font-family: Outfit, sans-serif;
+  pointer-events: none;
+  user-select: none;
+}
+
+.blobber button,
+.blobber input,
+.blobber select {
+  font: inherit;
+}
+
+.blobber button {
+  cursor: pointer;
+}
+
+.blobber input {
+  user-select: text;
+}
+
+.blobber button:focus-visible,
+.blobber select:focus-visible {
+  outline: 3px solid var(--mint);
+  outline-offset: 4px;
+}
+
+.blobber header {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 3;
+  display: flex;
+  height: 104px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 5%;
+  pointer-events: none;
+}
+
+.blobber header > * {
+  pointer-events: auto;
+}
+
+.blobber .brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #fff;
+  font-family: Syne, sans-serif;
+  font-size: 32px;
+  font-weight: 800;
+  letter-spacing: -1.8px;
+  filter: drop-shadow(0 0 14px #c9f69520);
+}
+
+.blobber .brand-word {
+  letter-spacing: -0.06em;
+}
+
+.blobber .brand-blob {
+  display: flex;
+  width: 36px;
+  height: 32px;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  margin-right: 3px;
+  border-radius: 45% 55% 48% 42%;
+  background: var(--mint);
+  transform: rotate(-12deg);
+}
+
+.blobber .brand-blob i,
+.blobber .dialog-blob i {
+  width: 4px;
+  height: 7px;
+  border-radius: 50%;
+  background: #17262b;
+}
+
+.blobber .header-right {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.blobber .status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #b7c6cb;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.6px;
+}
+
+.blobber .status i,
+.blobber .bottom-hud i {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--mint);
+}
+
+.blobber .library-link,
+.blobber .icon {
+  height: 39px;
+  border: 1px solid #bba6ff26;
+  border-radius: 12px;
+  background: #17213bcc;
+  color: #d8e3e4;
+}
+
+.blobber .library-link {
+  padding: 0 12px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.blobber .icon {
+  position: relative;
+  width: 39px;
+  font-size: 21px;
+}
+
+.blobber .icon span {
+  position: absolute;
+  right: 6px;
+  bottom: 4px;
+  font-size: 15px;
+}
+
+.blobber .music-control {
+  display: inline-flex;
+  width: auto;
+  min-width: 84px;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 0 10px;
+}
+
+.blobber .music-control span {
+  position: static;
+  font-size: 18px;
+}
+
+.blobber .music-control .music-label {
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.blobber .music-control.active {
+  border-color: #c9f69588;
+  background: #c9f69512;
+  color: var(--mint);
+}
+
+.blobber .menu {
+  position: absolute;
+  top: 50%;
+  left: 9%;
+  z-index: 2;
+  width: 440px;
+  transform: translateY(-46%);
+  pointer-events: auto;
+}
+
+.blobber .eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  color: var(--mint);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.blobber .eyebrow > span {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--mint);
+}
+
+.blobber h1 {
+  margin: 22px 0 18px;
+  color: var(--text);
+  font-family: Syne, sans-serif;
+  font-size: 64px;
+  font-weight: 800;
+  letter-spacing: -3.5px;
+  line-height: 1.04;
+}
+
+.blobber h1 em {
+  color: var(--mint);
+  font-style: normal;
+}
+
+.blobber .intro {
+  margin: 0 0 26px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.blobber .play-card {
+  width: 370px;
+  padding: 23px;
+  border: 1px solid #bba6ff24;
+  border-radius: 18px;
+  background: #16213ad9;
+  box-shadow: 0 18px 65px #05092166, 0 0 70px #6658ba12;
+  backdrop-filter: blur(15px);
+}
+
+.blobber label {
+  display: block;
+  margin-bottom: 10px;
+  color: #b6c6cc;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1.3px;
+}
+
+.blobber input,
+.blobber select {
+  border: 1px solid #ffffff16;
+  border-radius: 8px;
+  background: #0d172c;
+  color: #fff;
+}
+
+.blobber input {
+  width: 100%;
+  padding: 13px 14px;
+  font-size: 14px;
+  outline: none;
+}
+
+.blobber input:focus {
+  border-color: var(--mint);
+}
+
+.blobber input::placeholder {
+  color: #60757e;
+}
+
+.blobber .customize {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  margin: 20px 0 22px;
+}
+
+.blobber .swatches {
+  display: flex;
+  gap: 9px;
+  padding-top: 2px;
+}
+
+.blobber .swatch {
+  position: relative;
+  width: 23px;
+  height: 23px;
+  border: 0;
+  border-radius: 50%;
+}
+
+.blobber .swatch.selected::after {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border: 1px solid #ecf5f0;
+  border-radius: 50%;
+}
+
+.blobber select {
+  padding: 7px 25px 7px 10px;
+  color: #e1ece8;
+  font-size: 12px;
+}
+
+.blobber .level-choice {
+  margin: 0 0 18px;
+}
+
+.blobber .level-choice label {
+  margin-bottom: 8px;
+}
+
+.blobber .level-choice select {
+  width: 100%;
+  padding: 10px 12px;
+  font-size: 12px;
+}
+
+.blobber .level-choice p {
+  min-height: 30px;
+  margin: 9px 0 0;
+  color: #a8bbd7;
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.blobber .primary {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 18px;
+  border: 0;
+  border-radius: 9px;
+  background: var(--mint);
+  box-shadow: 0 4px 24px #c9f69513;
+  color: #192721;
+  font-size: 15px;
+  font-weight: 700;
+  transition: transform 0.2s, background 0.2s;
+}
+
+.blobber .primary:hover {
+  background: #d9ffb0;
+  transform: translateY(-2px);
+}
+
+.blobber .primary > span {
+  font-size: 22px;
+  line-height: 20px;
+}
+
+.blobber .card-note {
+  margin-top: 13px;
+  color: #788f98;
+  font-size: 10px;
+  text-align: center;
+}
+
+.blobber .instructions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 18px;
+  row-gap: 12px;
+  margin-top: 25px;
+}
+
+.blobber .instructions > div {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.blobber .instructions p {
+  margin: 0;
+}
+
+.blobber .instructions b {
+  display: block;
+  font-size: 10px;
+  font-weight: 500;
+}
+
+.blobber .instructions small {
+  display: block;
+  margin-top: 4px;
+  color: #81969f;
+  font-size: 8px;
+}
+
+.blobber .key {
+  display: grid;
+  min-width: 25px;
+  height: 27px;
+  place-items: center;
+  border: 1px solid #ffffff15;
+  border-radius: 5px;
+  background: #15213a;
+  color: #b4c4ca;
+  font-size: 11px;
+}
+
+.blobber .key.wide {
+  padding: 0 6px;
+  font-size: 8px;
+}
+
+.blobber .best-line {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 24px;
+  color: #82969e;
+  font-size: 9px;
+  letter-spacing: 1.1px;
+}
+
+.blobber .best-line b {
+  color: #c4d5d8;
+  font-size: 13px;
+  letter-spacing: 0;
+}
+
+.blobber .best-line > span {
+  margin-left: -4px;
+  letter-spacing: 0;
+}
+
+.blobber .world-note {
+  position: absolute;
+  bottom: 23%;
+  left: 64%;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.blobber .world-note b {
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.blobber .world-note small {
+  display: block;
+  margin-top: 6px;
+  color: #9daed0;
+  font-size: 10px;
+}
+
+.blobber .tiny-blob {
+  position: relative;
+  width: 28px;
+  height: 28px;
+  border: 1px solid #c9f6954d;
+  border-radius: 50%;
+  background: #c9f69517;
+  box-shadow: 0 0 25px #c9f6951f;
+}
+
+.blobber .tiny-blob::after {
+  content: "••";
+  position: absolute;
+  top: 2px;
+  left: 7px;
+  color: var(--mint);
+  letter-spacing: 2px;
+}
+
+.blobber footer {
+  position: absolute;
+  right: 5%;
+  bottom: 26px;
+  left: 5%;
+  display: flex;
+  justify-content: space-between;
+  color: #7e8caf;
+  font-size: 10px;
+}
+
+.blobber .hud {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.blobber .score-panel {
+  position: absolute;
+  top: 115px;
+  left: 5%;
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  padding: 16px 22px;
+  border: 1px solid #a59cf326;
+  border-radius: 14px;
+  background: #111c35e8;
+  backdrop-filter: blur(12px);
+}
+
+.blobber .score-panel small {
+  display: block;
+  margin-bottom: 5px;
+  color: #91a9b2;
+  font-size: 9px;
+  letter-spacing: 1px;
+}
+
+.blobber .score-panel strong {
+  color: var(--mint);
+  font-family: Syne, sans-serif;
+  font-size: 28px;
+}
+
+.blobber .score-panel b {
+  font-family: Syne, sans-serif;
+  font-size: 17px;
+  font-weight: 500;
+}
+
+.blobber .challenge-panel {
+  position: absolute;
+  top: 203px;
+  left: 5%;
+  width: 286px;
+  max-width: 90%;
+  padding: 13px 16px;
+  border: 1px solid #c9f6952e;
+  border-radius: 12px;
+  background: #111c35ec;
+  backdrop-filter: blur(12px);
+}
+
+.blobber .challenge-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.blobber .challenge-heading b {
+  color: #e2eddd;
+  font-family: Syne, sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.blobber .challenge-heading span {
+  color: var(--mint);
+  font-size: 10px;
+  white-space: nowrap;
+}
+
+.blobber .challenge-panel p {
+  margin: 8px 0 10px;
+  color: #b1c4dd;
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.blobber .challenge-panel progress {
+  display: block;
+  width: 100%;
+  height: 5px;
+  overflow: hidden;
+  border: 0;
+  border-radius: 9px;
+  background: #263348;
+  accent-color: var(--mint);
+}
+
+.blobber .challenge-panel progress::-webkit-progress-bar {
+  border-radius: 9px;
+  background: #263348;
+}
+
+.blobber .challenge-panel progress::-webkit-progress-value,
+.blobber .challenge-panel progress::-moz-progress-bar {
+  border-radius: 9px;
+  background: var(--mint);
+}
+
+.blobber .leaderboard-toggle {
+  position: absolute;
+  top: 115px;
+  right: 5%;
+  display: flex;
+  height: 36px;
+  align-items: center;
+  gap: 9px;
+  padding: 0 12px;
+  border: 1px solid #bba6ff26;
+  border-radius: 10px;
+  background: #111c35e8;
+  color: #b8c7de;
+  font-size: 11px;
+  pointer-events: auto;
+}
+
+.blobber .leaderboard-toggle:hover,
+.blobber .leaderboard-toggle[aria-expanded="true"] {
+  border-color: #c9f69566;
+  color: #eef8ec;
+}
+
+.blobber .leaderboard-toggle b {
+  color: var(--mint);
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+}
+
+.blobber .board-label-short {
+  display: none;
+}
+
+.blobber .board-chevron {
+  font-size: 15px;
+  line-height: 1;
+  transition: transform 0.15s;
+}
+
+.blobber .leaderboard-toggle[aria-expanded="true"] .board-chevron {
+  transform: rotate(180deg);
+}
+
+.blobber .leaderboard {
+  position: absolute;
+  top: 159px;
+  right: 5%;
+  z-index: 2;
+  width: 256px;
+  max-width: calc(100vw - 32px);
+  max-height: calc(100dvh - 250px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 16px;
+  border: 1px solid #bba6ff26;
+  border-radius: 14px;
+  background: #101c32f5;
+  box-shadow: 0 12px 32px #0003;
+  pointer-events: auto;
+  scrollbar-color: #394765 transparent;
+  scrollbar-width: thin;
+}
+
+.blobber .board-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #b8cbd0;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.3px;
+}
+
+.blobber .board-head span {
+  color: var(--mint);
+  font-size: 9px;
+  letter-spacing: 0.4px;
+}
+
+.blobber .board-columns {
+  display: flex;
+  justify-content: space-between;
+  margin: 17px 0 6px;
+  padding-left: 45px;
+  color: #788da8;
+  font-size: 8px;
+  letter-spacing: 1px;
+}
+
+.blobber .leaderboard ol {
+  margin: 0 0 12px;
+  padding: 0;
+  list-style: none;
+}
+
+.blobber .leaderboard li {
+  display: grid;
+  min-height: 32px;
+  align-items: center;
+  grid-template-columns: 22px 8px minmax(0, 1fr) 45px;
+  gap: 7px;
+  padding: 7px 5px;
+  border-radius: 6px;
+  color: #a4b8c0;
+  font-size: 11px;
+}
+
+.blobber .leaderboard li .place {
+  color: #92a5bd;
+  font-size: 10px;
+  text-align: center;
+}
+
+.blobber .leaderboard li .dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+
+.blobber .leaderboard li .who {
+  overflow: hidden;
+  font-weight: 500;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.blobber .leaderboard li .points {
+  color: #dae4f2;
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+.blobber .leaderboard li.me {
+  background: #c9f6950e;
+  color: var(--mint);
+}
+
+.blobber .leaderboard li.me .place,
+.blobber .leaderboard li.me .points {
+  color: var(--mint);
+}
+
+.blobber .leaderboard li.pinned {
+  margin-top: 10px;
+  border-top: 1px solid #c9f69533;
+}
+
+.blobber .arena-note {
+  padding-top: 10px;
+  border-top: 1px solid #ffffff0c;
+  color: #91a4be;
+  font-size: 9px;
+}
+
+.blobber .bottom-hud {
+  position: absolute;
+  right: 5%;
+  bottom: 30px;
+  left: 5%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+.blobber .bottom-hud > span {
+  padding: 12px 17px;
+  border: 1px solid #a59cf326;
+  border-radius: 10px;
+  background: #111c35e8;
+  color: #b4c7cf;
+  font-size: 11px;
+}
+
+.blobber .bottom-hud b {
+  margin-left: 8px;
+  font-weight: 400;
+}
+
+.blobber .bottom-hud > div {
+  display: flex;
+  gap: 8px;
+}
+
+.blobber .control {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 10px 14px;
+  border: 1px solid #a59cf326;
+  border-radius: 9px;
+  background: #111c35e8;
+  color: #d5e2e5;
+  font-size: 12px;
+  pointer-events: auto;
+}
+
+.blobber .control:disabled {
+  cursor: default;
+  opacity: 0.45;
+}
+
+.blobber .control:active {
+  background: #2d424b;
+}
+
+.blobber kbd {
+  padding: 3px 5px;
+  border: 1px solid #ffffff20;
+  border-radius: 4px;
+  color: #839da8;
+  font-size: 9px;
+}
+
+.blobber #minimap {
+  position: absolute;
+  right: 5%;
+  bottom: 91px;
+  width: 120px !important;
+  height: 120px !important;
+  border: 1px solid #bba6ff26;
+  border-radius: 12px;
+  background: #111a35dd;
+}
+
+.blobber .hidden {
+  display: none !important;
+}
+
+.blobber .dialog {
+  position: absolute;
+  inset: 0;
+  z-index: 9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #07131b9c;
+  pointer-events: auto;
+  backdrop-filter: blur(12px);
+}
+
+.blobber .dialog-card {
+  width: 370px;
+  max-height: 90dvh;
+  overflow-y: auto;
+  padding: 35px;
+  border: 1px solid #bba6ff26;
+  border-radius: 22px;
+  background: #16213b;
+  box-shadow: 0 30px 100px #0006;
+  text-align: center;
+}
+
+.blobber .dialog-blob {
+  display: flex;
+  width: 65px;
+  height: 60px;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  margin: 0 auto 25px;
+  border-radius: 46% 54% 44% 53%;
+  background: var(--mint);
+  transform: rotate(-10deg);
+}
+
+.blobber .dialog-blob i {
+  width: 6px;
+  height: 11px;
+}
+
+.blobber .dialog-card .eyebrow {
+  justify-content: center;
+  font-size: 9px;
+}
+
+.blobber .dialog-card h2 {
+  margin: 15px 0;
+  font-family: Syne, sans-serif;
+  font-size: 33px;
+  font-weight: 800;
+  letter-spacing: -1px;
+}
+
+.blobber .dialog-card p {
+  margin-bottom: 25px;
+  color: #94adb8;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.blobber .text-button {
+  margin-top: 18px;
+  padding: 5px;
+  border: 0;
+  background: none;
+  color: #91a8b3;
+  font-size: 12px;
+}
+
+.blobber .dialog-card .level-replay {
+  margin-top: 10px;
+  border: 1px solid #bba6ff33;
+  background: transparent;
+  box-shadow: none;
+  color: #b8c9e4;
+  font-size: 12px;
+}
+
+.blobber .round-stats {
+  display: flex;
+  justify-content: space-around;
+  margin: 20px 0 27px;
+}
+
+.blobber .round-stats small {
+  display: block;
+  color: #8aa3ac;
+  font-size: 9px;
+  letter-spacing: 1px;
+}
+
+.blobber .round-stats b {
+  display: block;
+  margin-top: 8px;
+  color: var(--mint);
+  font-family: Syne, sans-serif;
+  font-size: 24px;
+}
+
+.blobber .toast {
+  position: absolute;
+  top: 105px;
+  left: 50%;
+  z-index: 10;
+  padding: 12px 20px;
+  border: 1px solid #c9f69533;
+  border-radius: 25px;
+  background: #21363b;
+  font-size: 12px;
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, -10px);
+  transition: 0.25s;
+}
+
+.blobber .toast.show {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+@media (min-height: 850px) {
+  .blobber .menu {
+    transform: translateY(-45%);
+  }
+
+  .blobber h1 {
+    font-size: 76px;
+  }
+
+  .blobber .intro {
+    margin-bottom: 30px;
+  }
+
+  .blobber .play-card {
+    padding: 26px;
+  }
+
+  .blobber .instructions {
+    margin-top: 30px;
+  }
+}
+
+@media (max-height: 980px) {
+  .blobber .menu {
+    top: 86px;
+    bottom: auto;
+    max-height: none;
+    overflow: visible;
+    transform: none;
+  }
+
+  .blobber h1 {
+    margin: 8px 0 8px;
+    font-size: 54px;
+    letter-spacing: -2.6px;
+  }
+
+  .blobber .intro {
+    margin-bottom: 12px;
+    font-size: 14px;
+  }
+
+  .blobber .play-card {
+    padding: 16px;
+  }
+
+  .blobber .customize {
+    margin: 12px 0;
+  }
+
+  .blobber .level-choice {
+    margin-bottom: 12px;
+  }
+
+  .blobber .instructions {
+    margin-top: 12px;
+  }
+
+  .blobber .best-line {
+    margin-top: 10px;
+  }
+
+  .blobber footer {
+    display: none;
+  }
+}
+
+@media (max-height: 760px) {
+  .blobber .menu {
+    top: 78px;
+    bottom: 36px;
+  }
+
+  .blobber .menu-scroll {
+    min-height: 0;
+    overflow-y: auto;
+    scrollbar-color: #394765 transparent;
+    scrollbar-width: thin;
+  }
+}
+
+@media (max-width: 850px) {
+  .blobber .menu {
+    left: 7%;
+    width: 380px;
+  }
+
+  .blobber .world-note {
+    display: none;
+  }
+
+  .blobber .instructions {
+    gap: 12px;
+  }
+
+  .blobber h1 {
+    font-size: 58px;
+  }
+
+  .blobber footer span {
+    display: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .blobber header {
+    height: 78px;
+    padding: 0 6%;
+  }
+
+  .blobber .brand {
+    font-size: 27px;
+  }
+
+  .blobber .status {
+    display: none;
+  }
+
+  .blobber .header-right {
+    gap: 8px;
+  }
+
+  .blobber .menu {
+    top: 48%;
+    right: 7%;
+    left: 7%;
+    width: auto;
+    transform: translateY(-42%);
+  }
+
+  .blobber h1 {
+    margin: 17px 0 14px;
+    font-size: 52px;
+    letter-spacing: -2.7px;
+    line-height: 1;
+  }
+
+  .blobber .intro {
+    margin-bottom: 20px;
+    font-size: 13px;
+  }
+
+  .blobber .play-card {
+    width: 100%;
+    max-width: 370px;
+    padding: 20px;
+  }
+
+  .blobber .instructions {
+    gap: 15px;
+    margin-top: 20px;
+  }
+
+  .blobber .best-line {
+    margin-top: 16px;
+  }
+
+  .blobber footer {
+    bottom: 16px;
+    font-size: 9px;
+  }
+
+  .blobber .score-panel {
+    top: 85px;
+    left: 5%;
+    gap: 16px;
+    padding: 11px 14px;
+  }
+
+  .blobber .score-panel strong {
+    font-size: 23px;
+  }
+
+  .blobber .score-panel b {
+    font-size: 14px;
+  }
+
+  .blobber .challenge-panel {
+    top: 163px;
+    width: 256px;
+    padding: 11px 13px;
+  }
+
+  .blobber .challenge-heading b {
+    font-size: 11px;
+  }
+
+  .blobber .challenge-panel p {
+    font-size: 10px;
+  }
+
+  .blobber .leaderboard-toggle {
+    top: 85px;
+  }
+
+  .blobber .leaderboard {
+    top: 129px;
+    width: 240px;
+    max-height: calc(100dvh - 220px);
+    padding: 14px;
+  }
+
+  .blobber .bottom-hud {
+    right: 5%;
+    bottom: 20px;
+    left: 5%;
+  }
+
+  .blobber .bottom-hud > span {
+    display: none;
+  }
+
+  .blobber .bottom-hud > div {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .blobber .bottom-hud .control {
+    flex: 1;
+    justify-content: center;
+    padding: 14px 12px;
+    background: #20333fed;
+    font-size: 13px;
+  }
+
+  .blobber kbd {
+    display: none;
+  }
+
+  .blobber #minimap {
+    right: 5%;
+    bottom: 90px;
+    width: 88px !important;
+    height: 88px !important;
+  }
+
+  .blobber .dialog-card {
+    width: 90%;
+    max-width: 370px;
+    padding: 30px;
+  }
+
+  .blobber .toast {
+    max-width: 90%;
+    font-size: 11px;
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 360px) {
+  .blobber .board-label {
+    display: none;
+  }
+
+  .blobber .board-label-short {
+    display: inline;
+  }
+
+  .blobber .leaderboard-toggle {
+    gap: 7px;
+    padding: 0 9px;
+  }
+
+  .blobber .music-control {
+    width: 39px;
+    min-width: 39px;
+    padding: 0;
+  }
+
+  .blobber .music-control .music-label {
+    display: none;
+  }
+}
+
+@media (max-height: 710px) {
+  .blobber .menu {
+    top: 51%;
+    transform: translateY(-46%);
+  }
+
+  .blobber h1 {
+    margin: 15px 0 10px;
+    font-size: 48px;
+  }
+
+  .blobber .intro {
+    margin: 0 0 16px;
+    font-size: 13px;
+  }
+
+  .blobber .play-card {
+    padding: 18px;
+  }
+
+  .blobber .customize {
+    margin: 16px 0;
+  }
+
+  .blobber .instructions {
+    margin-top: 16px;
+  }
+
+  .blobber .best-line {
+    margin-top: 14px;
+  }
+
+  .blobber footer {
+    bottom: 14px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .blobber button,
+  .blobber .toast,
+  .blobber .board-chevron {
+    transition: none;
+  }
+}

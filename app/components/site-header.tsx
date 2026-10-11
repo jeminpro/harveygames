@@ -4,9 +4,11 @@ export function SiteHeader({ savedLocally }: { savedLocally: boolean }) {
   return (
     <header className="topbar">
       <Link to="/" className="brand">
-        <span className="brand-mark" aria-hidden="true">
-          H
-        </span>
+        <img
+          className="brand-mark"
+          src={`${import.meta.env.BASE_URL.replace(/\/?$/, "/")}logo.png`}
+          alt=""
+        />
         <span className="brand-name">
           Harvey <em>Games</em>
         </span>
