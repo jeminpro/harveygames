@@ -104,14 +104,22 @@ function wave(x: number) {
   return (n + 1) / 2;
 }
 
-function terrain(x: number, viewH: number) {
-  const lift = Math.min(viewH * 0.42, 300);
-  const base = Math.max(64, Math.min(140, viewH * 0.14));
-  return base + wave(x) * lift;
+function groundBand(viewH: number) {
+  // Short screens, especially phones in landscape, keep a low horizon.
+  const share = viewH < 700 ? 0.2 + (viewH / 700) * 0.08 : 0.28;
+  const ceiling = Math.min(viewH * share, 240);
+  const base = Math.min(Math.max(18, viewH * 0.045), ceiling * 0.38);
+  return { base, lift: Math.max(14, ceiling - base) };
 }
 
-function hill(x: number) {
-  return 90 + Math.sin(x * 0.00042) * 54 + Math.sin(x * 0.00015 + 1.4) * 28;
+function terrain(x: number, viewH: number) {
+  const band = groundBand(viewH);
+  return band.base + wave(x) * band.lift;
+}
+
+function hill(x: number, amp: number) {
+  const n = Math.sin(x * 0.00042) * 0.62 + Math.sin(x * 0.00015 + 1.4) * 0.38;
+  return ((n + 1) / 2) * amp;
 }
 
 function formatDistance(px: number) {
@@ -636,6 +644,7 @@ export class RustwingSession {
     this.releasePitch();
     this.keys.clear();
     this.vy = 0;
+    this.options.root.classList.remove("in-flight");
     this.refs.menu.classList.remove("hidden");
     this.refs.hud.classList.add("hidden");
     this.refs.pitchControls.classList.add("hidden");
@@ -672,6 +681,7 @@ export class RustwingSession {
     const ground = this.groundTop(nose);
     const clearance = this.owned.has("wheel") ? 230 : 160;
     this.planeY = Math.max(56, Math.min(ground - clearance, this.h * (this.owned.has("wheel") ? 0.32 : 0.4)));
+    this.options.root.classList.add("in-flight");
     this.refs.menu.classList.add("hidden");
     this.refs.dialog.classList.add("hidden");
     this.closeShop();
@@ -988,9 +998,8 @@ export class RustwingSession {
   private drawSky(ctx: CanvasRenderingContext2D) {
     const sky = ctx.createLinearGradient(0, 0, 0, this.h);
     sky.addColorStop(0, "#6eb6e0");
-    sky.addColorStop(0.42, "#b9def3");
-    sky.addColorStop(0.72, "#f6e7c4");
-    sky.addColorStop(1, "#d5e2a4");
+    sky.addColorStop(0.55, "#b7def2");
+    sky.addColorStop(1, "#f3e2c4");
     ctx.fillStyle = sky;
     ctx.fillRect(0, 0, this.w, this.h);
     const sunX = this.w * 0.78;
@@ -1019,15 +1028,19 @@ export class RustwingSession {
   }
 
   private drawHills(ctx: CanvasRenderingContext2D) {
-    this.fillRidge(ctx, 0.28, "#8eaa78", 150, (x) => hill(x));
-    this.fillRidge(ctx, 0.45, "#7c9968", 70, (x) => hill(x * 1.3) * 0.75);
-    const cam = this.cameraX * 0.28;
+    const amp = Math.min(this.h * 0.07, 64);
+    const farBase = Math.min(this.h * 0.045, 36);
+    const nearBase = Math.min(this.h * 0.02, 16);
+    this.fillRidge(ctx, 0.22, "#a7c0d0", farBase, (x) => hill(x, amp));
+    this.fillRidge(ctx, 0.4, "#8d9c90", nearBase, (x) => hill(x * 1.3, amp * 0.72));
+    const cam = this.cameraX * 0.22;
     for (let index = Math.floor(cam / 700) - 1; index < cam / 700 + this.w / 700 + 2; index += 1) {
-      const x = index * 700 - cam;
-      const y = this.h - 150 - hill(index * 700);
-      ctx.fillStyle = "#6d5a4a";
+      const world = index * 700;
+      const x = world - cam;
+      const y = this.h - farBase - hill(world, amp);
+      ctx.fillStyle = "#8d97a1";
       ctx.fillRect(x, y - 8, 12, 8);
-      ctx.fillStyle = "#8d4d3a";
+      ctx.fillStyle = "#b7a090";
       ctx.beginPath();
       ctx.moveTo(x - 2, y - 8);
       ctx.lineTo(x + 6, y - 16);
@@ -1056,6 +1069,9 @@ export class RustwingSession {
   }
 
   private drawFields(ctx: CanvasRenderingContext2D) {
+    const lip = Math.max(10, Math.min(18, this.h * 0.028));
+    this.fillGround(ctx, 0, "#5c3b22");
+
     const band = 280;
     let sx = -((this.cameraX % band) + band) % band;
     while (sx < this.w) {
@@ -1066,7 +1082,7 @@ export class RustwingSession {
       ctx.beginPath();
       ctx.moveTo(sx, this.h);
       for (let x = sx; x <= x2 + 8; x += 12) {
-        ctx.lineTo(x, this.groundTop(this.cameraX + x));
+        ctx.lineTo(x, this.groundTop(this.cameraX + x) + lip);
       }
       ctx.lineTo(x2, this.h);
       ctx.closePath();
@@ -1076,34 +1092,43 @@ export class RustwingSession {
         ctx.strokeStyle = "rgba(255, 236, 180, 0.35)";
         ctx.lineWidth = 1;
         for (let x = sx; x < x2; x += 12) {
-          const gy = this.groundTop(this.cameraX + x);
+          const gy = this.groundTop(this.cameraX + x) + lip;
           ctx.beginPath();
-          ctx.moveTo(x, gy + 8);
-          ctx.lineTo(x + 1, gy + 18);
+          ctx.moveTo(x, gy + 4);
+          ctx.lineTo(x + 1, gy + 14);
           ctx.stroke();
         }
       }
       sx = x2;
     }
 
-    ctx.beginPath();
-    for (let x = 0; x <= this.w; x += 10) {
-      const gy = this.groundTop(this.cameraX + x);
-      if (x === 0) ctx.moveTo(x, gy + 16);
-      else ctx.lineTo(x, gy + 16);
-    }
-    ctx.strokeStyle = "rgba(176, 132, 72, 0.85)";
-    ctx.lineWidth = 8;
-    ctx.stroke();
+    this.strokeGround(ctx, lip * 0.45, "#3a2416", lip);
+    this.strokeGround(ctx, 0, "#f7f4ee", 3.5);
+    this.strokeGround(ctx, -1.5, "#c8f542", 2);
+  }
 
-    ctx.strokeStyle = "#3e6b32";
-    ctx.lineWidth = 3;
+  private fillGround(ctx: CanvasRenderingContext2D, offset: number, color: string) {
+    ctx.beginPath();
+    ctx.moveTo(0, this.h);
+    for (let x = 0; x <= this.w + 8; x += 8) {
+      ctx.lineTo(x, this.groundTop(this.cameraX + x) + offset);
+    }
+    ctx.lineTo(this.w, this.h);
+    ctx.closePath();
+    ctx.fillStyle = color;
+    ctx.fill();
+  }
+
+  private strokeGround(ctx: CanvasRenderingContext2D, offset: number, color: string, width: number) {
     ctx.beginPath();
     for (let x = 0; x <= this.w; x += 8) {
-      const gy = this.groundTop(this.cameraX + x);
-      if (x === 0) ctx.moveTo(x, gy);
-      else ctx.lineTo(x, gy);
+      const y = this.groundTop(this.cameraX + x) + offset;
+      if (x === 0) ctx.moveTo(x, y);
+      else ctx.lineTo(x, y);
     }
+    ctx.strokeStyle = color;
+    ctx.lineWidth = width;
+    ctx.lineJoin = "round";
     ctx.stroke();
   }
 

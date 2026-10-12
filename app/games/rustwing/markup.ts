@@ -25,14 +25,14 @@ export const rustwingMarkup = `
     <button id="market" class="market-button" type="button">Market</button>
     <button id="start" class="primary" type="button">Take off <span>↗</span></button>
   </div>
-  <p class="controls">Up points the nose up · Down points it down</p>
+  <p class="controls">Up points the nose up · Down points it down. The pale line is the ground.</p>
 </main>
 <div id="hud" class="hud hidden">
   <div class="score-pill">
     <div><small>Flown</small><b id="distance">0 m</b></div>
   </div>
   <p id="rate">Coins for every stretch you stay up.</p>
-  <p id="hint">Up to point up. Down to point down.</p>
+  <p id="hint">The pale line is the ground. Stay above it.</p>
 </div>
 <div id="pitchControls" class="pitch-controls hidden">
   <button id="pitchUp" type="button" aria-label="Point up" aria-pressed="false">Up</button>

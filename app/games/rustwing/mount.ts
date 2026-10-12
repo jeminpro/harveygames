@@ -28,7 +28,7 @@ class RustwingScene extends Phaser.Scene {
       throw new Error("Rustwing needs the canvas renderer.");
     }
 
-    canvas.setAttribute("aria-label", "Flight Simulator countryside");
+    canvas.setAttribute("aria-label", "Flight Simulator. Stay above the pale ground line.");
     this.session = new RustwingSession({
       root: this.overlay,
       canvas,
