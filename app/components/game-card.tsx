@@ -1,15 +1,18 @@
 import { Link } from "react-router";
-import type { GameRecord } from "../games/catalog";
+import { findGame, type GameRecord } from "../games/catalog";
 
 export function GameCard({ game }: { game: GameRecord }) {
-  const index = String(game.order).padStart(2, "0");
+  const details = { ...game, ...findGame(game.id) };
+  const cover = `${import.meta.env.BASE_URL.replace(/\/?$/, "/")}covers/${details.id}.jpg`;
 
   return (
-    <Link to={`/play/${game.id}`} className="card">
-      <span className="card-index">{index}</span>
-      <h2>{game.title}</h2>
-      <p>{game.tagline}</p>
-      <span className="play-pill">Play</span>
+    <Link to={`/play/${details.id}`} className="card">
+      <span className="card-shot">
+        <img src={cover} alt="" />
+      </span>
+      <span className="card-genre">{details.genre}</span>
+      <h2>{details.title}</h2>
+      <p>{details.tagline}</p>
     </Link>
   );
 }
