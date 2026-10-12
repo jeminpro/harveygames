@@ -95,9 +95,6 @@ type Refs = {
   worldNote: HTMLElement;
   footer: HTMLElement;
   hud: HTMLElement;
-  mass: HTMLElement;
-  best: HTMLElement;
-  time: HTMLElement;
   challengePanel: HTMLElement;
   levelTitle: HTMLElement;
   levelCount: HTMLElement;
@@ -108,7 +105,6 @@ type Refs = {
   rank: HTMLElement;
   boardToggleRank: HTMLElement;
   leaders: HTMLOListElement;
-  hint: HTMLElement;
   join: HTMLButtonElement;
   split: HTMLButtonElement;
   eject: HTMLButtonElement;
@@ -309,9 +305,6 @@ export class BlobberSession {
       worldNote: must(this.root, "worldNote"),
       footer: must(this.root, "footer"),
       hud: must(this.root, "hud"),
-      mass: must(this.root, "mass"),
-      best: must(this.root, "best"),
-      time: must(this.root, "time"),
       challengePanel: must(this.root, "challengePanel"),
       levelTitle: must(this.root, "levelTitle"),
       levelCount: must(this.root, "levelCount"),
@@ -322,7 +315,6 @@ export class BlobberSession {
       rank: must(this.root, "rank"),
       boardToggleRank: must(this.root, "boardToggleRank"),
       leaders: must(this.root, "leaders"),
-      hint: must(this.root, "hint"),
       join: must(this.root, "join"),
       split: must(this.root, "split"),
       eject: must(this.root, "eject"),
@@ -359,7 +351,10 @@ export class BlobberSession {
       event.preventDefault();
       if (this.mode !== "menu") this.home();
     };
-    this.refs.cabinetHome.onclick = () => this.options.onExit();
+    this.refs.cabinetHome.onclick = () => {
+      if (this.mode === "menu") this.options.onExit();
+      else this.home();
+    };
     this.refs.pause.onclick = () => this.pause();
     this.refs.resume.onclick = () => this.pause();
     this.refs.split.onclick = () => this.split();
@@ -396,7 +391,6 @@ export class BlobberSession {
       this.best = 0;
     }
     this.refs.menuBest.textContent = String(this.best);
-    this.refs.best.textContent = String(this.best);
     COLORS.forEach((color, index) => {
       const button = document.createElement("button");
       button.type = "button";
@@ -556,6 +550,7 @@ export class BlobberSession {
     this.cells.push(player);
     this.camera = { x: player.x, y: player.y, zoom: 1.1 };
     this.mode = "playing";
+    this.setRoundChrome(true);
     this.setLeaderboardOpen(false);
     this.refs.menu.classList.add("hidden");
     this.refs.worldNote.classList.add("hidden");
@@ -582,7 +577,10 @@ export class BlobberSession {
     if (this.disposed) return;
     this.mode = "menu";
     this.hideHelp();
+    this.setRoundChrome(false);
     this.setLeaderboardOpen(false);
+    window.clearTimeout(this.toastTimer);
+    this.refs.toast.classList.remove("show");
     this.refs.menu.classList.remove("hidden");
     this.refs.worldNote.classList.remove("hidden");
     this.refs.footer.classList.remove("hidden");
@@ -1006,7 +1004,9 @@ export class BlobberSession {
       const centerY = mine.reduce((sum, blob) => sum + blob.y * blob.mass, 0) / total;
       this.camera.x += (centerX - this.camera.x) * Math.min(1, dt * 5);
       this.camera.y += (centerY - this.camera.y) * Math.min(1, dt * 5);
-      const zoom = clamp(1.2 - Math.log2(total / 20) * 0.12, 0.38, 1.2);
+      const shortSide = Math.min(this.w, this.h);
+      const share = shortSide < 560 ? 0.22 : shortSide < 960 ? 0.32 : 0.4;
+      const zoom = clamp((shortSide * share) / this.playerSpan(mine), shortSide < 560 ? 0.045 : 0.08, 1.15);
       this.camera.zoom += (zoom - this.camera.zoom) * Math.min(1, dt * 2);
     } else {
       this.camera.x = WORLD / 2 + Math.sin(this.elapsed * 0.04) * 200;
@@ -1052,7 +1052,7 @@ export class BlobberSession {
       ctx.fillStyle = dot.color;
       ctx.globalAlpha = 0.65;
       ctx.beginPath();
-      ctx.arc(dot.x, dot.y, dot.r, 0, Math.PI * 2);
+      ctx.arc(dot.x, dot.y, Math.max(dot.r, 1.5 / zoom), 0, Math.PI * 2);
       ctx.fill();
     }
     ctx.globalAlpha = 1;
@@ -1171,10 +1171,15 @@ export class BlobberSession {
     ctx.textAlign = "center";
     ctx.textBaseline = "alphabetic";
     ctx.fillStyle = "#142630";
-    ctx.font = this.font(600, Math.max(9, Math.min(19, reach * 0.23)));
+    const labelZoom = Math.max(this.camera.zoom, 0.05);
+    ctx.font = this.font(600, blob.owner === 0
+      ? Math.max(Math.min(19, reach * 0.23), 12 / labelZoom)
+      : Math.max(9, Math.min(19, reach * 0.23)));
     ctx.fillText(blob.name, x, y + reach * 0.28);
     if (this.mode === "playing" || this.mode === "paused" || this.mode === "complete") {
-      ctx.font = this.font(600, Math.max(9, Math.min(24, reach * 0.2)));
+      ctx.font = this.font(600, blob.owner === 0
+        ? Math.max(Math.min(22, reach * 0.2), 12 / labelZoom)
+        : Math.max(9, Math.min(24, reach * 0.2)));
       ctx.fillStyle = "#142630";
       ctx.fillText(String(Math.floor(blob.mass)), x, y + reach * 0.68);
     }
@@ -1183,8 +1188,11 @@ export class BlobberSession {
 
   private drawTriangle(shape: Shape) {
     const ctx = this.ctx;
+    const scale = this.pickupScale(shape.r);
     ctx.save();
     ctx.translate(shape.x, shape.y);
+    ctx.save();
+    ctx.scale(scale, scale);
     ctx.shadowColor = "#ffc97880";
     ctx.shadowBlur = 12;
     ctx.fillStyle = "#ffd58e";
@@ -1203,16 +1211,22 @@ export class BlobberSession {
     ctx.textBaseline = "middle";
     ctx.font = this.font(700, 12);
     ctx.fillText("+", 0, 0);
+    ctx.restore();
     ctx.fillStyle = "#ffe3b3";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
     ctx.font = this.font(700, Math.max(10, 10 / this.camera.zoom));
-    ctx.fillText("+5%", 0, shape.r + 12 / this.camera.zoom);
+    ctx.fillText("+5%", 0, shape.r * scale + 12 / this.camera.zoom);
     ctx.restore();
   }
 
   private drawSquare(shape: Shape) {
     const ctx = this.ctx;
+    const scale = this.pickupScale(shape.r);
     ctx.save();
     ctx.translate(shape.x, shape.y);
+    ctx.save();
+    ctx.scale(scale, scale);
     ctx.shadowColor = "#ff809680";
     ctx.shadowBlur = 12;
     ctx.fillStyle = "#ff9aa9";
@@ -1226,16 +1240,22 @@ export class BlobberSession {
     ctx.textBaseline = "middle";
     ctx.font = this.font(700, 15);
     ctx.fillText("\u2212", 0, 0);
+    ctx.restore();
     ctx.fillStyle = "#ffc2ce";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
     ctx.font = this.font(700, Math.max(10, 10 / this.camera.zoom));
-    ctx.fillText("\u22125%", 0, shape.r + 12 / this.camera.zoom);
+    ctx.fillText("\u22125%", 0, shape.r * scale + 12 / this.camera.zoom);
     ctx.restore();
   }
 
   private drawDiamond(gem: Diamond) {
     const ctx = this.ctx;
+    const scale = this.pickupScale(gem.r);
     ctx.save();
     ctx.translate(gem.x, gem.y);
+    ctx.save();
+    ctx.scale(scale, scale);
     ctx.shadowColor = "#79dbff99";
     ctx.shadowBlur = 18;
     ctx.fillStyle = "#83e4ff";
@@ -1255,9 +1275,12 @@ export class BlobberSession {
     ctx.textBaseline = "middle";
     ctx.font = this.font(700, 13);
     ctx.fillText("\u25c6", 0, 0);
+    ctx.restore();
     ctx.fillStyle = "#b9efff";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
     ctx.font = this.font(700, Math.max(10, 10 / this.camera.zoom));
-    ctx.fillText("KEY", 0, gem.r + 12 / this.camera.zoom);
+    ctx.fillText("KEY", 0, gem.r * scale + 12 / this.camera.zoom);
     ctx.restore();
   }
 
@@ -1336,9 +1359,6 @@ export class BlobberSession {
     const sorted = [...totals.values()].sort((a, b) => b.mass - a.mass);
     const mine = totals.get(0);
     const rank = sorted.findIndex((score) => score.owner === 0) + 1;
-    this.refs.mass.textContent = String(Math.floor(mine?.mass ?? 0));
-    this.refs.best.textContent = String(Math.max(this.best, Math.floor(this.peak)));
-    this.refs.time.textContent = this.formatTime(this.elapsed);
     this.refs.rank.textContent = `YOU #${rank}`;
     this.refs.boardToggleRank.textContent = `#${rank}`;
     const top = sorted.slice(0, 5);
@@ -1365,13 +1385,6 @@ export class BlobberSession {
     );
     const count = this.cells.filter((blob) => blob.owner === 0).length;
     this.refs.join.disabled = count < 2;
-    this.refs.hint.textContent = this.elapsed < 3
-      ? "Safe start — find some food!"
-      : count > 1
-        ? `J or Join: ${count} → ${Math.ceil(count / 2)} blobs.`
-        : (mine?.mass ?? 0) >= 36
-          ? "Space to split. Go catch a smaller rival."
-          : "Triangles +5%. Squares \u22125%.";
     this.mini.clearRect(0, 0, 144, 144);
     for (const blob of this.cells) {
       this.mini.fillStyle = blob.owner === 0 ? "#c9f695" : "#627782";
@@ -1464,6 +1477,33 @@ export class BlobberSession {
 
   private releaseFocus() {
     if (document.activeElement instanceof HTMLElement) document.activeElement.blur();
+  }
+
+  private setRoundChrome(inRound: boolean) {
+    this.root.classList.toggle("in-round", inRound);
+    const label = this.refs.cabinetHome.querySelector("span");
+    if (label) label.textContent = inRound ? "back" : "home";
+    this.refs.cabinetHome.setAttribute("aria-label", inRound ? "Back to setup" : "Back to home");
+  }
+
+  private playerSpan(mine: Cell[]) {
+    let minX = Infinity;
+    let minY = Infinity;
+    let maxX = -Infinity;
+    let maxY = -Infinity;
+    for (const blob of mine) {
+      const reach = radius(blob.mass);
+      minX = Math.min(minX, blob.x - reach);
+      maxX = Math.max(maxX, blob.x + reach);
+      minY = Math.min(minY, blob.y - reach);
+      maxY = Math.max(maxY, blob.y + reach);
+    }
+    return Math.max(maxX - minX, maxY - minY, 48);
+  }
+
+  private pickupScale(size: number) {
+    const pixels = size * Math.max(this.camera.zoom, 0.05);
+    return pixels >= 8 ? 1 : 8 / pixels;
   }
 
   private setLeaderboardOpen(open: boolean) {

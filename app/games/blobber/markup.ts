@@ -62,25 +62,21 @@ export const blobberMarkup = `
 </main>
 <div id="worldNote" class="world-note"><span class="tiny-blob"></span><div><b>A little ambition goes a long way.</b><small>Collect dots and triangles. Watch out for squares.</small></div></div>
 <div id="hud" class="hud hidden">
-  <div class="score-panel">
-    <div><small>YOUR MASS</small><strong id="mass">0</strong></div>
-    <div><small>BEST</small><b id="best">0</b></div>
-    <div><small>TIME</small><b id="time">0:00</b></div>
+  <div class="side-stack">
+    <aside id="challengePanel" class="challenge-panel hidden" aria-label="Level objective">
+      <div class="challenge-heading"><b id="levelTitle">Triangle trail</b><span id="levelCount">0 / 4</span></div>
+      <p id="levelGoal">Collect 4 golden triangles.</p>
+      <progress id="levelBar" max="4" value="0" aria-label="Level progress"></progress>
+    </aside>
+    <button id="leaderboardToggle" type="button" class="leaderboard-toggle" aria-controls="leaderboard" aria-expanded="false" aria-label="Show leaderboard"><span class="board-label">Leaderboard</span><span class="board-label-short">Ranks</span><b id="boardToggleRank">#—</b><span class="board-chevron" aria-hidden="true">⌄</span></button>
+    <aside id="leaderboard" class="leaderboard hidden" aria-label="Leaderboard">
+      <div class="board-head">TOP BLOBS <span id="rank">#—</span></div>
+      <div class="board-columns"><span>BLOB</span><span>MASS</span></div>
+      <ol id="leaders"></ol>
+      <div class="arena-note">Top 5 + your position</div>
+    </aside>
   </div>
-  <aside id="challengePanel" class="challenge-panel hidden" aria-label="Level objective">
-    <div class="challenge-heading"><b id="levelTitle">Triangle trail</b><span id="levelCount">0 / 4</span></div>
-    <p id="levelGoal">Collect 4 golden triangles.</p>
-    <progress id="levelBar" max="4" value="0" aria-label="Level progress"></progress>
-  </aside>
-  <button id="leaderboardToggle" type="button" class="leaderboard-toggle" aria-controls="leaderboard" aria-expanded="false" aria-label="Show leaderboard"><span class="board-label">Leaderboard</span><span class="board-label-short">Ranks</span><b id="boardToggleRank">#—</b><span class="board-chevron" aria-hidden="true">⌄</span></button>
-  <aside id="leaderboard" class="leaderboard hidden" aria-label="Leaderboard">
-    <div class="board-head">TOP BLOBS <span id="rank">#—</span></div>
-    <div class="board-columns"><span>BLOB</span><span>MASS</span></div>
-    <ol id="leaders"></ol>
-    <div class="arena-note">Top 5 + your position</div>
-  </aside>
   <div class="bottom-hud">
-    <span><i></i> <b id="hint">Eat the dots. Find your moment.</b></span>
     <div>
       <button id="split" type="button" class="control">Split <kbd>SPACE</kbd></button>
       <button id="join" type="button" class="control" disabled title="Join one step at a time (J)">Join <kbd>J</kbd></button>
