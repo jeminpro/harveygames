@@ -623,12 +623,9 @@
 
 @media (max-height: 760px) {
   .rustwing .menu {
-    top: calc(64px + env(safe-area-inset-top, 0px));
-    right: max(4%, env(safe-area-inset-right, 0px));
-    bottom: calc(12px + env(safe-area-inset-bottom, 0px));
-    left: max(4%, env(safe-area-inset-left, 0px));
-    width: auto;
-    max-height: none;
+    top: calc(76px + env(safe-area-inset-top, 0px));
+    bottom: auto;
+    max-height: calc(100dvh - 96px - env(safe-area-inset-bottom, 0px));
     overflow: auto;
     transform: none;
   }
