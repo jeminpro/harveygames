@@ -1,0 +1,9 @@
+# Google only reads robots.txt from the domain root:
+# https://jeminpro.com/robots.txt
+# Allow /harveygames/ there, and add:
+# Sitemap: https://jeminpro.com/harveygames/sitemap.xml
+
+User-agent: *
+Allow: /
+
+Sitemap: https://jeminpro.com/harveygames/sitemap.xml

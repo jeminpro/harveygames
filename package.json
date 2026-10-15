@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "react-router dev",
-    "build": "react-router build && node scripts/hoist-pages.mjs",
+    "build": "react-router build && node scripts/hoist-pages.mjs && node scripts/write-sitemap.mjs",
     "typecheck": "react-router typegen && tsc"
   },
   "dependencies": {

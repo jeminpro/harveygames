@@ -15,6 +15,7 @@ import {
 } from "react-router";
 import { SiteHeader } from "./components/site-header";
 import { seedCatalog } from "./db/client";
+import { siteName, siteUrl } from "./site";
 import type { Route } from "./+types/root";
 import stylesheet from "./app.css?url";
 
@@ -23,6 +24,12 @@ export const links: Route.LinksFunction = () => [
     rel: "icon",
     href: `${import.meta.env.BASE_URL.replace(/\/?$/, "/")}logo.png`,
     type: "image/png",
+  },
+  {
+    rel: "sitemap",
+    type: "application/xml",
+    title: "Sitemap",
+    href: `${siteUrl}sitemap.xml`,
   },
   { rel: "stylesheet", href: syne700 },
   { rel: "stylesheet", href: syne800 },
@@ -35,11 +42,9 @@ export const links: Route.LinksFunction = () => [
 
 export function meta() {
   return [
-    { title: "Harvey Games" },
-    {
-      name: "description",
-      content: "A local cabinet of games that stays in this browser.",
-    },
+    { title: siteName },
+    { name: "application-name", content: siteName },
+    { name: "robots", content: "index, follow" },
   ];
 }
 
